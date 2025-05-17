@@ -67,21 +67,25 @@ export const HeaderClient: React.FC = () => {
 
           {user && (
             <Link href="/favourites" className="flex items-center gap-1">
-              <HeartIcon className="size-5" />
-              Ulubione ({user.favourites?.length})
+              <div className="relative">
+                <HeartIcon className="size-5" />
+
+                <span className="-top-3 left-2 absolute bg-red-500 p-0.5 px-2 rounded-full text-red-50 text-sm scale-75">
+                  {user?.favourites?.length ?? 0}
+                </span>
+              </div>
             </Link>
           )}
 
           {user && (
             <Link prefetch={false} href="/account" className="flex items-center gap-1">
               <UserIcon className="size-5" />
-              {t('account')}
             </Link>
           )}
 
           {!user && (
             <Link prefetch={false} href="/login" className="flex items-center gap-1">
-              {t('login')}
+              <UserIcon className="size-5" />
             </Link>
           )}
         </div>

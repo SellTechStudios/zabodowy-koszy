@@ -7,10 +7,6 @@ export type SearchRequest = {
   page: number
 }
 
-export type VectorSearchRequest = {
-  searchVector: number[]
-}
-
 export type ProductSearchResponse = {
   products: ProductItem[]
   total: number
@@ -36,6 +32,5 @@ export type FacetBucket = {
 
 export type FacetedNavigation = {
   price?: FacetBucket
-  manufacturer?: FacetBucket
   category?: FacetBucket
 }

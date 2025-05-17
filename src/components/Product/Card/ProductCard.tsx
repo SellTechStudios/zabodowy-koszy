@@ -21,7 +21,8 @@ export const ProductCard: React.FC<ProductProps> = ({ product }: ProductProps) =
 
   const isInCart = isProductInCart(product.id)
   const firstImage = product.images?.[0]
-  const imageUrl = typeof firstImage === 'string' ? firstImage : firstImage?.url
+  const imageUrl =
+    typeof firstImage === 'string' ? firstImage : firstImage?.url || '/media/missing.png'
 
   const percentageOff =
     product.pricePrevious && product.pricePrevious > product.price
@@ -35,13 +36,13 @@ export const ProductCard: React.FC<ProductProps> = ({ product }: ProductProps) =
   }
 
   return (
-    <div className="relative flex flex-col bg-white shadow-md border border-gray-100 rounded-lg">
+    <div className="relative flex flex-col">
       <a
         className="group relative flex mx-3 mt-3 rounded-xl overflow-hidden"
         href={`/product/${product.slug}`}
       >
         <img
-          src={imageUrl || ''}
+          src={imageUrl}
           className="w-full h-60 object-scale-down group-hover:scale-105 transition-transform duration-100 ease-linear"
           alt={product.title}
         />

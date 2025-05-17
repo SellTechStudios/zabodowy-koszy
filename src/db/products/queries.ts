@@ -1,8 +1,7 @@
-import { FacetedNavigation, ProductSearchResponse, SearchRequest } from './queries.types'
-
 import { PipelineStage } from 'mongoose'
-import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { FacetedNavigation,  ProductSearchResponse,  SearchRequest } from './queries.types'
 
 const getSortStage = (params: SearchRequest): PipelineStage.Sort => {
   switch (params.type) {
@@ -65,12 +64,12 @@ const fetchProducts = async (params: SearchRequest) => {
               _id: 0,
               id: { $toString: '$_id' },
               bestseller: 1,
+
               title: 1,
               price: 1,
               pricePrevious: 1,
-              mediaImages: 1,
               slug: 1,
-              rating: 1,
+              images: 1,
             },
           },
         ],
@@ -117,49 +116,16 @@ const fetchFacets = async (params: SearchRequest): Promise<FacetedNavigation> =>
         preserveNullAndEmptyArrays: true,
       },
     },
-    // lookup for manufacturers
-    {
-      $lookup: {
-        from: 'manufacturers',
-        localField: 'manufacturer',
-        foreignField: '_id',
-        as: 'manufacturerDetails',
-      },
-    },
-    {
-      $unwind: {
-        path: '$manufacturerDetails',
-        preserveNullAndEmptyArrays: true,
-      },
-    },
     {
       $project: {
         categoryId: '$categoryDetails._id',
         categoryName: '$categoryDetails.name',
-        manufacturerId: '$manufacturerDetails._id',
-        manufacturerName: '$manufacturerDetails.name',
         bestseller: 1,
         price: 1,
       },
     },
     {
       $facet: {
-        // Manufacturer facets
-        manufacturerFacets: [
-          {
-            $match: { manufacturerId: { $ne: null } },
-          },
-          {
-            $group: {
-              _id: '$manufacturerId',
-              name: { $first: '$manufacturerName' },
-              count: { $sum: 1 },
-            },
-          },
-          { $sort: { count: -1, name: 1 } },
-          { $project: { _id: 0, label: '$name', count: 1, value: { $toString: '$_id' } } },
-        ],
-
         // Category facets
         categoryFacets: [
           {
@@ -230,12 +196,6 @@ const fetchFacets = async (params: SearchRequest): Promise<FacetedNavigation> =>
 
   // Format the response
   const facets: FacetedNavigation = {
-    manufacturer: {
-      code: 'MANUFACTURER',
-      label: 'Manufacturer',
-      type: 'checkboxes',
-      options: result.manufacturerFacets || [],
-    },
     category: {
       code: 'CATEGORY',
       label: 'Categories',

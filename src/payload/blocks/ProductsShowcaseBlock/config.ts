@@ -20,7 +20,7 @@ export const ProductsShowcaseBlock: Block = {
       hasMany: true,
       unique: true,
       minRows: 1,
-      maxDepth: 1,
+      maxDepth: 2,
     },
   ],
 }

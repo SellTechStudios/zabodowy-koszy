@@ -1,5 +1,9 @@
 import './globals.css'
-
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
+import { Archivo,  Work_Sans } from 'next/font/google'
+import { draftMode } from 'next/headers'
+import React from 'react'
 import { AdminBar } from '@/components/AdminBar'
 import { Container } from '@/components/Container'
 import { Footer } from '@/payload/globals/Footer/Component'
@@ -9,14 +13,14 @@ import { getServerSideURL } from '@/payload/utilities/getURL'
 import { mergeOpenGraph } from '@/payload/utilities/mergeOpenGraph'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
-import type { Metadata } from 'next'
-import { Work_Sans } from 'next/font/google'
-import { draftMode } from 'next/headers'
-import React from 'react'
 
+import type { Metadata } from 'next'
 const work_sans = Work_Sans({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+})
+
+const archivo = Archivo({
   weight: ['400', '600', '700'],
   subsets: ['latin'],
 })
@@ -31,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body className={cn(work_sans.className)}>
+      <body className={cn(archivo.className)}>
         <Providers>
           <AdminBar
             adminBarProps={{

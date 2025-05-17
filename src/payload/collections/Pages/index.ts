@@ -1,22 +1,18 @@
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields'
-import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
-
-import type { CollectionConfig } from 'payload'
-import { Content } from '../../blocks/Content/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { ProductsShowcaseBlock } from '@/payload/blocks/ProductsShowcaseBlock/config'
 import { ProductsSliderBlock } from '@/payload/blocks/ProductsSliderBlock/config'
+import { slugField } from '@/payload/fields/slug'
+import {
+    MetaDescriptionField,  MetaImageField,  MetaTitleField,  OverviewField,  PreviewField
+} from '@payloadcms/plugin-seo/fields'
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { Content } from '../../blocks/Content/config'
+import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { slugField } from '@/payload/fields/slug'
+import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { revalidateDelete,  revalidatePage } from './hooks/revalidatePage'
 
+import type { CollectionConfig } from 'payload'
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
   access: {
@@ -68,10 +64,10 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Content, MediaBlock, ProductsSliderBlock],
+              blocks: [Content, MediaBlock, ProductsSliderBlock, ProductsShowcaseBlock],
               required: true,
               admin: {
-                initCollapsed: true,
+                initCollapsed: false,
               },
             },
           ],

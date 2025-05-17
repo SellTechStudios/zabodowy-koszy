@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
 
 export const ProductsShowcaseBlock: Block = {
-  slug: 'productsShowcaseBlock',
+  slug: 'productsShowcase',
   interfaceName: 'ProductsShowcaseBlock',
   labels: {
     singular: 'Products Showcase',

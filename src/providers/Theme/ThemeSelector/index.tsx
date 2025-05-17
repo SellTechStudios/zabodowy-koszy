@@ -1,18 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React,  { useState } from 'react'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/payload/blocks/Form/_ui/select'
+    Select,  SelectContent,  SelectItem,  SelectTrigger,  SelectValue
+} from '@/components/FormElements/select'
+import { useTheme } from '../'
+import { themeLocalStorageKey } from './types'
 
 import type { Theme } from './types'
-import { themeLocalStorageKey } from './types'
-import { useTheme } from '..'
-
 export const ThemeSelector: React.FC = () => {
   const { setTheme } = useTheme()
   const [value, setValue] = useState('')
@@ -36,7 +31,7 @@ export const ThemeSelector: React.FC = () => {
     <Select onValueChange={onThemeChange} value={value}>
       <SelectTrigger
         aria-label="Select a theme"
-        className="w-auto bg-transparent gap-2 pl-0 md:pl-3 border-none"
+        className="gap-2 bg-transparent pl-0 md:pl-3 border-none w-auto"
       >
         <SelectValue placeholder="Theme" />
       </SelectTrigger>

@@ -62,7 +62,7 @@ export default async function Post(props: Args) {
       )}
       <div>
         <h1 className="mb-8 text-header1">{post.title}</h1>
-        <RichText className="" data={post.content} enableGutter={false} enableProse={false} />
+        <RichText className="" data={post.content} />
 
         {post.relatedPosts && post.relatedPosts.length > 0 && (
           <div className="mt-16">

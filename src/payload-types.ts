@@ -149,18 +149,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (
-    | ContentBlock
-    | MediaBlock
-    | {
-        ProductsCount: number;
-        Description?: string | null;
-        ListType?: ('Bestsellers' | 'Recent') | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'productsSlider';
-      }
-  )[];
+  layout: (ContentBlock | MediaBlock | ProductsSliderBlock | ProductsShowcaseBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -181,113 +170,7 @@ export interface Page {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
-  columns?:
-    | {
-        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-        richText?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'content';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: string;
-  title: string;
-  description?: string | null;
-  isTrending?: boolean | null;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  tags?:
-    | {
-        tag?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  relatedPosts?: (string | Post)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt?: string | null;
-  caption?: {
+  richText?: {
     root: {
       type: string;
       children: {
@@ -302,6 +185,27 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -374,40 +278,26 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "ProductsSliderBlock".
  */
-export interface User {
-  id: string;
-  name?: string | null;
-  surname?: string | null;
-  phoneNumber?: string | null;
-  roles?: ('admin' | 'customer')[] | null;
-  purchases?: (string | Product)[] | null;
-  favourites?: (string | Product)[] | null;
-  cart?: {
-    items?: CartItems;
-  };
-  addresses?:
-    | {
-        zipCode: string;
-        city: string;
-        street: string;
-        houseNumber: string;
-        apartmentNumber?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  skipSync?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
+export interface ProductsSliderBlock {
+  ProductsCount: number;
+  Description?: string | null;
+  ListType?: ('Bestsellers' | 'Recent') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'productsSlider';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductsShowcaseBlock".
+ */
+export interface ProductsShowcaseBlock {
+  title: string;
+  products?: (string | Product)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'productsShowcase';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -458,13 +348,94 @@ export interface ProductCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock".
+ * via the `definition` "posts".
  */
-export interface MediaBlock {
-  media: string | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mediaBlock';
+export interface Post {
+  id: string;
+  title: string;
+  description?: string | null;
+  isTrending?: boolean | null;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  relatedPosts?: (string | Post)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  name?: string | null;
+  surname?: string | null;
+  phoneNumber?: string | null;
+  roles?: ('admin' | 'customer')[] | null;
+  purchases?: (string | Product)[] | null;
+  favourites?: (string | Product)[] | null;
+  cart?: {
+    items?: CartItems;
+  };
+  addresses?:
+    | {
+        zipCode: string;
+        city: string;
+        street: string;
+        houseNumber: string;
+        apartmentNumber?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  skipSync?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -587,15 +558,8 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
-        productsSlider?:
-          | T
-          | {
-              ProductsCount?: T;
-              Description?: T;
-              ListType?: T;
-              id?: T;
-              blockName?: T;
-            };
+        productsSlider?: T | ProductsSliderBlockSelect<T>;
+        productsShowcase?: T | ProductsShowcaseBlockSelect<T>;
       };
   meta?:
     | T
@@ -616,24 +580,7 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "ContentBlock_select".
  */
 export interface ContentBlockSelect<T extends boolean = true> {
-  columns?:
-    | T
-    | {
-        size?: T;
-        richText?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
+  richText?: T;
   id?: T;
   blockName?: T;
 }
@@ -643,6 +590,27 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductsSliderBlock_select".
+ */
+export interface ProductsSliderBlockSelect<T extends boolean = true> {
+  ProductsCount?: T;
+  Description?: T;
+  ListType?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductsShowcaseBlock_select".
+ */
+export interface ProductsShowcaseBlockSelect<T extends boolean = true> {
+  title?: T;
+  products?: T;
   id?: T;
   blockName?: T;
 }
@@ -690,7 +658,6 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  caption?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -990,17 +957,6 @@ export interface HeaderSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProductsShowcaseBlock".
- */
-export interface ProductsShowcaseBlock {
-  title: string;
-  products?: (string | Product)[] | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'productsShowcaseBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

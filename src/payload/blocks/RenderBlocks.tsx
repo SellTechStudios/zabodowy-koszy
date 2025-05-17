@@ -5,12 +5,6 @@ import { ProductsShowcaseBlock } from './ProductsShowcaseBlock/Component.Client'
 import { ProductsSliderBlock } from './ProductsSliderBlock/Component'
 
 import type { Page } from '@/payload-types'
-const blockComponents = {
-  content: ContentBlock,
-  mediaBlock: MediaBlock,
-  productsSlider: ProductsSliderBlock,
-  productsShowcase: ProductsShowcaseBlock,
-}
 
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
@@ -25,17 +19,17 @@ export const RenderBlocks: React.FC<{
         {blocks.map((block, index) => {
           const { blockType } = block
 
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
-
-            if (Block) {
-              return (
-                <div className={index > 0 ? 'my-12' : ''} key={index}>
-                  <Block {...block} />
-                </div>
-              )
-            }
+          switch (blockType) {
+            case 'content':
+              return <ContentBlock {...block} key={index} />
+            case 'mediaBlock':
+              return <MediaBlock {...block} key={index} />
+            case 'productsSlider':
+              return <ProductsSliderBlock {...block} key={index} />
+            case 'productsShowcase':
+              return <ProductsShowcaseBlock {...block} key={index} />
           }
+
           return null
         })}
       </Fragment>

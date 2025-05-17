@@ -1,10 +1,10 @@
+import clsx from 'clsx'
 import Link from 'next/link'
-import type { Post } from '@/payload-types'
 import React from 'react'
 import RichText from '@/components/RichText'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import clsx from 'clsx'
 
+import type { Post } from '@/payload-types'
 export type RelatedPostsProps = {
   className?: string
   docs?: Post[]
@@ -16,7 +16,7 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
 
   return (
     <div className={clsx('lg:container', className)}>
-      {introContent && <RichText data={introContent} enableGutter={false} />}
+      {introContent && <RichText data={introContent} />}
 
       <div className="items-stretch gap-4 md:gap-8 grid grid-cols-1 md:grid-cols-2">
         {docs?.map((doc) => {

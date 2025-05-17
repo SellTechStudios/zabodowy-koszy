@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { admins } from '../../../access/admins'
 import { slugField } from '../../../fields/slug'
 import { deleteProductFromCarts } from './hooks/deleteProductFromCarts'
@@ -55,7 +55,7 @@ const Products: CollectionConfig = {
             {
               name: 'description',
               type: 'richText',
-              editor: lexicalEditor(),
+              editor: defaultLexical,
             },
             {
               name: 'specialOffer',

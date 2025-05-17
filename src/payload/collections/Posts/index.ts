@@ -1,16 +1,11 @@
 import { anyone } from '@/payload/access/anyone'
 import { authenticated } from '@/payload/access/authenticated'
+import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import {
     MetaDescriptionField,  MetaImageField,  MetaTitleField,  OverviewField,  PreviewField
 } from '@payloadcms/plugin-seo/fields'
-import {
-    AlignFeature,  BlockquoteFeature,  BlocksFeature,  ChecklistFeature,  FixedToolbarFeature,
-    HeadingFeature,  HorizontalRuleFeature,  IndentFeature,  InlineToolbarFeature,  lexicalEditor,
-    SubscriptFeature,  SuperscriptFeature
-} from '@payloadcms/richtext-lexical'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete,  revalidatePost } from './hooks/revalidatePost'
 
@@ -87,25 +82,7 @@ export const Posts: CollectionConfig<'posts'> = {
               localized: true,
               name: 'content',
               type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    AlignFeature(),
-                    IndentFeature(),
-                    ChecklistFeature(),
-                    BlockquoteFeature(),
-                    SubscriptFeature(),
-                    SuperscriptFeature(),
-                    // OrderedListFeature(),    <-- that thing throws error in admin editor
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
-                },
-              }),
+              editor: defaultLexical,
               label: false,
               required: true,
             },

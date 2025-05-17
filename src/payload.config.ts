@@ -14,6 +14,7 @@ import { Pages } from './payload/collections/Pages'
 import { PostCategories } from './payload/collections/PostCategories'
 import { Posts } from './payload/collections/Posts'
 import { Users } from './payload/collections/Users'
+import { Header } from './payload/globals/Header/config'
 import { Settings } from './payload/globals/Settings/Settings'
 import { plugins } from './payload/plugins'
 import { getServerSideURL } from './payload/utilities/getURL'
@@ -68,7 +69,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, PostCategories, Users, Orders, Products, ProductCategory],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Settings],
+  globals: [Settings, Header],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

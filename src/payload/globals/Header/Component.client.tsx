@@ -1,38 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { HeartIcon, UserIcon } from '@heroicons/react/24/outline'
-import React, { useEffect, useState } from 'react'
-
-import { CMSLink } from '@/components/Link'
+import { SearchIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React,  { useEffect,  useState } from 'react'
 import { CartLink } from '@/components/Cart/CartLink'
 import { Container } from '@/components/Container'
-import type { Header } from '@/payload-types'
-import Link from 'next/link'
 import LocaleSwitcher from '@/components/LocaleSwicher'
-import { SearchIcon } from 'lucide-react'
 import { cn } from '@/payload/utilities/cn'
 import { useAuth } from '@/providers/Auth'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
-import { usePathname } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { HeartIcon,  UserIcon } from '@heroicons/react/24/outline'
 
-interface HeaderClientProps {
-  data: Header
-}
-
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+export const HeaderClient: React.FC = () => {
   const { user } = useAuth()
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
-  const navItems = data?.navItems || []
   const t = useTranslations('Header')
 
   const mainNavItems = [
+    { label: t('home'), path: '/' },
     { label: t('all'), path: '/products/all' },
-    { label: t('new'), path: '/products/new' },
-    { label: t('bestsellers'), path: '/products/bestseller' },
     { label: t('blog'), path: '/blog' },
     { label: t('contact'), path: '/contact' },
   ]
@@ -49,32 +40,28 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header className="py-4">
-      <Container className="flex flex-row items-center justify-between">
+      <Container className="flex flex-row justify-between items-center">
         <Link prefetch={false} href="/">
           <img src="/logo.svg" alt="Company Logo" width={120} height={0} />
         </Link>
 
         <form
           action={'/products/quicksearch'}
-          className="relative max-w-[300px] w-full hidden md:block"
+          className="hidden md:block relative w-full max-w-[300px]"
         >
           <input
             type="text"
             name="searchString"
             placeholder="Search..."
-            className="border w-full border-gray-300 rounded-full py-2 px-4 pr-10 text-sm focus:outline-none"
+            className="px-4 py-2 pr-10 border border-gray-300 rounded-full focus:outline-none w-full text-sm"
           />
-          <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+          <button type="submit" className="top-1/2 right-3 absolute -translate-y-1/2 transform">
             <SearchIcon className="w-5 text-gray-500" />
           </button>
         </form>
 
-        <div className="flex flex-row gap-6 uppercase text-sm items-center">
+        <div className="flex flex-row items-center gap-6 text-sm uppercase">
           <LocaleSwitcher />
-
-          {navItems.map(({ link }, i) => {
-            return <CMSLink key={i} {...link} appearance="default" />
-          })}
 
           <CartLink />
 
@@ -100,8 +87,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         </div>
       </Container>
 
-      <div className="flex flex-row justify-center bg-gray-800 text-gray-100 mt-4 relative left-1/2 w-dvw max-w-none -translate-x-1/2">
-        <nav className="flex flex-row justify-center items-center uppercase h-full">
+      <div className="left-1/2 relative flex flex-row justify-center bg-gray-800 mt-4 w-dvw max-w-none text-gray-100 -translate-x-1/2">
+        <nav className="flex flex-row justify-center items-center h-full uppercase">
           {mainNavItems.map((nav) => (
             <Link
               key={nav.path}

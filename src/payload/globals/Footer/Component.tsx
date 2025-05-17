@@ -1,46 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import React from 'react'
-import type { Footer, Settings } from '@/payload-types'
-import { BsTwitterX } from 'react-icons/bs'
-import { FaLinkedin, FaPinterest, FaSquareInstagram } from 'react-icons/fa6'
-import {
-  EnvelopeIcon,
-  MapPinIcon,
-  PhoneIcon,
-  TagIcon,
-  TruckIcon,
-} from '@heroicons/react/24/outline'
 import { Container } from '@/components/Container'
 import { getCachedGlobal } from '@/payload/utilities/getGlobals'
+import { EnvelopeIcon,  MapPinIcon,  PhoneIcon } from '@heroicons/react/24/outline'
 
+import type { Settings } from '@/payload-types'
 export async function Footer() {
   const settings: Settings = await getCachedGlobal('settings', 1)()
 
   return (
-    <footer className="bg-gray-100 py-24 font-light text-gray-800 text-opacity-75">
+    <footer
+      className="bg-gray-100 py-24 font-light text-gray-800 text-opacity-75"
+      style={{
+        backgroundImage: "url('/footer_bg.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <Container className="flex flex-col gap-24">
-        {/* delivery info */}
-        <div className="flex flex-row justify-center gap-40">
-          <div className="flex flex-col items-center prose">
-            <TruckIcon className="size-16" />
-            <h3 className="text-gray-900">Darmowa Dostawa</h3>
-            <div>dla zamówień powyżej 200 zł</div>
-          </div>
-
-          <div className="flex flex-col items-center prose">
-            <TagIcon className="size-16" />
-            <h3 className="text-gray-900">Tanie Dostawy</h3>
-            <div>Orlen Paczka: 8.50 zł</div>
-            <div>Paczkomaty InPost: 13.00 zł</div>
-          </div>
-        </div>
-
         {/* footer */}
         <nav className="flex flex-row justify-between items-start mx-auto align-top container">
           {/* contact info */}
           <div className="flex flex-col gap-6 text-sm">
-            <img src="/logo.png" width={140} height={60} alt="Mediapart Logo" />
+            <img src="/logo.svg" width={100} height={0} alt="Logo" />
             <div className="flex flex-row items-center gap-2">
               <MapPinIcon className="size-4" />
               <span>
@@ -72,32 +55,8 @@ export async function Footer() {
           </div>
 
           <nav className="flex flex-col prose">
-            <h5 className="mb-4 text-gray-900 uppercase">Informacje</h5>
+            <h5 className="mb-4 text-gray-900 uppercase">Pomoc</h5>
             <div className="flex flex-col gap-6 text-sm">
-              <Link
-                prefetch={false}
-                className="font-light hover:text-orange-700 no-underline"
-                href="#"
-              >
-                Polityka Prywatności
-              </Link>
-              <Link
-                prefetch={false}
-                className="font-light hover:text-orange-700 no-underline"
-                href="#"
-              >
-                Regulamin
-              </Link>
-              <Link
-                prefetch={false}
-                className="font-light hover:text-orange-700 no-underline"
-                href="#"
-              >
-                Dostawy
-              </Link>
-              <Link className="font-light hover:text-orange-700 no-underline" href="#">
-                Płatności
-              </Link>
               <Link
                 prefetch={false}
                 className="font-light hover:text-orange-700 no-underline"
@@ -110,103 +69,82 @@ export async function Footer() {
                 className="font-light hover:text-orange-700 no-underline"
                 href="#"
               >
-                Odstąpienie od umowy
+                Regulamin
               </Link>
             </div>
           </nav>
 
           <nav className="flex flex-col prose">
-            <h5 className="mb-4 text-gray-900 uppercase">Przydatne linki</h5>
+            <h5 className="mb-4 text-gray-900 uppercase">Moje Konto</h5>
             <div className="flex flex-col gap-6 text-sm">
               <Link
                 prefetch={false}
                 className="font-light hover:text-orange-700 no-underline"
-                href="login"
+                href="#"
               >
-                Logowanie
+                Twoje Zamówienia
               </Link>
               <Link
                 prefetch={false}
                 className="font-light hover:text-orange-700 no-underline"
                 href="#"
               >
-                Blog
+                Twoje Konto
               </Link>
               <Link
                 prefetch={false}
                 className="font-light hover:text-orange-700 no-underline"
                 href="#"
               >
-                Status Zamówienia
-              </Link>
-              <Link
-                prefetch={false}
-                className="font-light hover:text-orange-700 no-underline"
-                href="#"
-              >
-                Mapa Strony
+                Ulubione
               </Link>
             </div>
           </nav>
 
           <nav className="flex flex-col prose">
-            <h5 className="mb-4 text-gray-900 uppercase">Zobacz więcej</h5>
+            <h5 className="mb-4 text-gray-900 uppercase">Płatności i Dostawa</h5>
             <div className="flex flex-col gap-6 text-sm">
-              <div className="flex flex-row items-center gap-2">
-                <PhoneIcon className="size-4" />
-                <Link
-                  prefetch={false}
-                  className="font-light hover:text-orange-700 no-underline"
-                  href="https://www.facebook.com"
-                  target="_blank"
-                >
-                  Facebook
-                </Link>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <FaSquareInstagram />
-                <Link
-                  prefetch={false}
-                  className="font-light hover:text-orange-700 no-underline"
-                  href="https://www.facebook.com"
-                  target="_blank"
-                >
-                  Instagram
-                </Link>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <FaLinkedin />
-                <Link
-                  prefetch={false}
-                  className="font-light hover:text-orange-700 no-underline"
-                  href="https://www.linkedin.com"
-                  target="_blank"
-                >
-                  LinkedIn
-                </Link>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <BsTwitterX />
-                <Link
-                  prefetch={false}
-                  className="font-light hover:text-orange-700 no-underline"
-                  href="https://www.x.com"
-                  target="_blank"
-                >
-                  X / Twitter
-                </Link>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <FaPinterest />
-                <Link
-                  prefetch={false}
-                  className="font-light hover:text-orange-700 no-underline"
-                  href="https://www.x.com"
-                  target="_blank"
-                >
-                  Pinterest
-                </Link>
-              </div>
+              <Link
+                prefetch={false}
+                className="font-light hover:text-orange-700 no-underline"
+                href="#"
+              >
+                Formy Płatności
+              </Link>
+              <Link
+                prefetch={false}
+                className="font-light hover:text-orange-700 no-underline"
+                href="#"
+              >
+                Czas i koszt dostawy
+              </Link>
+              <Link
+                prefetch={false}
+                className="font-light hover:text-orange-700 no-underline"
+                href="#"
+              >
+                Czas realizacji
+              </Link>
+            </div>
+          </nav>
+
+          <nav className="flex flex-col prose">
+            <h5 className="mb-4 text-gray-900 uppercase">Inofrmacje</h5>
+            <div className="flex flex-col gap-6 text-sm">
+              <Link
+                prefetch={false}
+                className="font-light hover:text-orange-700 no-underline"
+                href="#"
+              >
+                Polityka prywatności
+              </Link>
+              <Link
+                prefetch={false}
+                className="font-light hover:text-orange-700 no-underline"
+                href="#"
+              >
+                Kontakt
+              </Link>
             </div>
           </nav>
         </nav>

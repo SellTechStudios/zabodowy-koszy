@@ -40,36 +40,6 @@ export const Settings: GlobalConfig = {
             },
           ],
         },
-        {
-          label: 'Social Media',
-          fields: [
-            {
-              name: 'facebook',
-              type: 'text',
-              label: 'Facebook',
-            },
-            {
-              name: 'instagram',
-              type: 'text',
-              label: 'Instagram',
-            },
-            {
-              name: 'linkedIn',
-              type: 'text',
-              label: 'LinkedIn',
-            },
-            {
-              name: 'twitter',
-              type: 'text',
-              label: 'X / Twitter',
-            },
-            {
-              name: 'pinterest',
-              type: 'text',
-              label: 'Pinterest',
-            },
-          ],
-        },
       ],
     },
   ],

@@ -10,12 +10,9 @@
     "home": "Strona główna",
     "about": "O nas",
     "account": "Moje konto",
-    "all": "Wszystkie",
-    "new": "Nowości",
-    "bestsellers": "Bestsellery",
+    "all": "Sklep",
     "blog": "Blog",
-    "contact": "Kontakt",
-    "aiSearch": "Wyszukaj AI"
+    "contact": "Kontakt"
   },
   "LocaleSwitcher": {
     "polish": "Polski",
@@ -26,11 +23,6 @@
     "heroTitleHighlight": "Wzmocnij",
     "heroTitleRest": "swój biznes dzięki nowoczesnym technologiom",
     "heroDescription": "Specjalizujemy się w tworzeniu aplikacji internetowych, rozwiązań e-commerce i doradztwie programistycznym, aby pomóc Twojej firmie prosperować w erze cyfrowej."
-  },
-  "AiSearch": {
-    "title": "Wyszukiwanie AI",
-    "description": "Użyj wyszukiwania AI, aby znaleźć produkty w naszym sklepie. Wpisz zapytanie, a my znajdziemy najlepsze dopasowania. Możesz użyć słów kluczowych, pytań lub opisów, aby uzyskać najbardziej trafne wyniki.",
-    "placeholder": "Szukaj…"
   },
   "ProductsSliderBlock": {
     "bestsellers": "Bestsellery",

@@ -109,9 +109,11 @@ export interface Config {
   };
   globals: {
     settings: Settings;
+    header: Header;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
   };
   locale: 'en' | 'pl';
   user: User & {
@@ -921,11 +923,35 @@ export interface Settings {
   addressLine2?: string | null;
   phone?: string | null;
   email?: string | null;
-  facebook?: string | null;
-  instagram?: string | null;
-  linkedIn?: string | null;
-  twitter?: string | null;
-  pinterest?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  navItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -938,11 +964,29 @@ export interface SettingsSelect<T extends boolean = true> {
   addressLine2?: T;
   phone?: T;
   email?: T;
-  facebook?: T;
-  instagram?: T;
-  linkedIn?: T;
-  twitter?: T;
-  pinterest?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  navItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

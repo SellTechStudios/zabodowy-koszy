@@ -1,8 +1,9 @@
 import { CollectionConfig } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { admins } from '../../../access/admins'
+import { slugField } from '../../../fields/slug'
 import { deleteProductFromCarts } from './hooks/deleteProductFromCarts'
 import { revalidateProduct } from './hooks/revalidateProduct'
-import { slugField } from '../../../fields/slug'
 
 const Products: CollectionConfig = {
   slug: 'products',
@@ -38,6 +39,11 @@ const Products: CollectionConfig = {
           label: 'Product Details',
           fields: [
             {
+              name: 'code',
+              type: 'text',
+              required: true,
+            },
+            {
               name: 'price',
               type: 'number',
               required: true,
@@ -47,46 +53,9 @@ const Products: CollectionConfig = {
               type: 'number',
             },
             {
-              name: 'color',
-              type: 'text',
-            },
-            {
               name: 'description',
-              type: 'textarea',
-            },
-            {
-              name: 'rating',
-              type: 'select',
-              options: [
-                {
-                  label: '1',
-                  value: '1',
-                },
-                {
-                  label: '2',
-                  value: '2',
-                },
-                {
-                  label: '3',
-                  value: '3',
-                },
-                {
-                  label: '4',
-                  value: '4',
-                },
-                {
-                  label: '5',
-                  value: '5',
-                },
-              ],
-            },
-            {
-              name: 'keywords',
-              type: 'text',
-            },
-            {
-              name: 'bestseller',
-              type: 'checkbox',
+              type: 'richText',
+              editor: lexicalEditor(),
             },
             {
               name: 'specialOffer',
@@ -94,22 +63,10 @@ const Products: CollectionConfig = {
               type: 'checkbox',
             },
             {
-              name: 'mediaImages',
-              label: 'Images',
-              type: 'array',
-              fields: [
-                {
-                  name: 'url',
-                  type: 'text',
-                  required: true,
-                },
-                {
-                  name: 'isMain',
-                  type: 'checkbox',
-                  required: true,
-                  defaultValue: false,
-                },
-              ],
+              name: 'images',
+              type: 'upload',
+              relationTo: 'media',
+              hasMany: true,
             },
           ],
         },

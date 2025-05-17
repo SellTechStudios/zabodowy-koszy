@@ -108,13 +108,9 @@ export interface Config {
     defaultIDType: string;
   };
   globals: {
-    header: Header;
-    footer: Footer;
     settings: Settings;
   };
   globalsSelect: {
-    header: HeaderSelect<false> | HeaderSelect<true>;
-    footer: FooterSelect<false> | FooterSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: 'en' | 'pl';
@@ -418,21 +414,26 @@ export interface User {
 export interface Product {
   id: string;
   title: string;
+  code: string;
   price: number;
   pricePrevious?: number | null;
-  color?: string | null;
-  description?: string | null;
-  rating?: ('1' | '2' | '3' | '4' | '5') | null;
-  keywords?: string | null;
-  bestseller?: boolean | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   specialOffer?: boolean | null;
-  mediaImages?:
-    | {
-        url: string;
-        isMain: boolean;
-        id?: string | null;
-      }[]
-    | null;
+  images?: (string | Media)[] | null;
   relatedProducts?: (string | Product)[] | null;
   seoTitle?: string | null;
   seoDescription?: string | null;
@@ -450,16 +451,6 @@ export interface Product {
 export interface ProductCategory {
   id: string;
   name: string;
-  description?: string | null;
-  parent?: (string | null) | ProductCategory;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | ProductCategory;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -863,21 +854,12 @@ export interface OrdersSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
+  code?: T;
   price?: T;
   pricePrevious?: T;
-  color?: T;
   description?: T;
-  rating?: T;
-  keywords?: T;
-  bestseller?: T;
   specialOffer?: T;
-  mediaImages?:
-    | T
-    | {
-        url?: T;
-        isMain?: T;
-        id?: T;
-      };
+  images?: T;
   relatedProducts?: T;
   seoTitle?: T;
   seoDescription?: T;
@@ -894,16 +876,6 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface ProductCategorySelect<T extends boolean = true> {
   name?: T;
-  description?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -941,70 +913,10 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "header".
- */
-export interface Header {
-  id: string;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer".
- */
-export interface Footer {
-  id: string;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings".
  */
 export interface Settings {
   id: string;
-  productsPage?: (string | null) | Page;
-  defaultProductCategory?: (string | null) | ProductCategory;
   addressLine1?: string | null;
   addressLine2?: string | null;
   phone?: string | null;
@@ -1019,57 +931,9 @@ export interface Settings {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "header_select".
- */
-export interface HeaderSelect<T extends boolean = true> {
-  navItems?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer_select".
- */
-export interface FooterSelect<T extends boolean = true> {
-  navItems?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
-  productsPage?: T;
-  defaultProductCategory?: T;
   addressLine1?: T;
   addressLine2?: T;
   phone?: T;

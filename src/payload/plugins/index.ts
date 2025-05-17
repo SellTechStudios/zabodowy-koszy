@@ -1,10 +1,8 @@
-import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { Page, Post } from '@/payload-types'
-
 import { Plugin } from 'payload'
+import { Page,  Post } from '@/payload-types'
 import { getServerSideURL } from '@/payload/utilities/getURL'
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { GenerateTitle,  GenerateURL } from '@payloadcms/plugin-seo/types'
 
 // import { beforeSyncWithSearch } from '@/search/beforeSync'
 
@@ -47,9 +45,6 @@ export const plugins: Plugin[] = [
   //     },
   //   },
   // }),
-  nestedDocsPlugin({
-    collections: ['product-category'],
-  }),
   seoPlugin({
     generateTitle,
     generateURL,

@@ -1,15 +1,12 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
 import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
+    FixedToolbarFeature,  InlineToolbarFeature,  lexicalEditor
 } from '@payloadcms/richtext-lexical'
-
-import type { CollectionConfig } from 'payload'
 import { anyone } from '../../access/anyone'
 import { authenticated } from '../../access/authenticated'
-import { fileURLToPath } from 'url'
-import path from 'path'
 
+import type { CollectionConfig } from 'payload'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 

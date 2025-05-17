@@ -13,19 +13,6 @@ export const Settings: GlobalConfig = {
   },
   fields: [
     {
-      name: 'productsPage',
-      type: 'relationship',
-      relationTo: 'pages',
-      label: 'Products page',
-    },
-    {
-      name: 'defaultProductCategory',
-      type: 'relationship',
-      relationTo: 'product-category',
-      label: 'Default Product Category',
-    },
-
-    {
       type: 'tabs',
       tabs: [
         {

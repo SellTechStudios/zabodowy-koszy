@@ -18,10 +18,6 @@ const ProductCategory: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'description',
-      type: 'textarea',
-    },
   ],
 }
 

@@ -1,18 +1,17 @@
+import { draftMode } from 'next/headers'
 import Image from 'next/image'
+import { getPayload } from 'payload'
+import { cache } from 'react'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import RichText from '@/components/RichText'
 import { Locale } from '@/i18n/config'
-import type { Metadata } from 'next'
+import { getUserLocale } from '@/services/locale'
+import { generateMeta } from '@/utilities/generateMeta'
+import configPromise from '@payload-config'
 import NotFound from '../../not-found'
 import { RelatedPosts } from '../_components/RelatedPosts'
-import RichText from '@/components/RichText'
-import Section from '@/components/Section/Section'
-import { cache } from 'react'
-import configPromise from '@payload-config'
-import { draftMode } from 'next/headers'
-import { generateMeta } from '@/utilities/generateMeta'
-import { getPayload } from 'payload'
-import { getUserLocale } from '@/services/locale'
 
+import type { Metadata } from 'next'
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const posts = await payload.find({
@@ -57,7 +56,7 @@ export default async function Post(props: Args) {
       {draft && <LivePreviewListener />}
 
       {imgUrl && (
-        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] mb-8">
+        <div className="relative mb-8 w-full h-[300px] sm:h-[400px] md:h-[600px]">
           <Image src={imgUrl} alt={post.title} className="object-cover" fill sizes="100vw" />
         </div>
       )}
@@ -66,17 +65,13 @@ export default async function Post(props: Args) {
         <RichText className="" data={post.content} enableGutter={false} enableProse={false} />
 
         {post.relatedPosts && post.relatedPosts.length > 0 && (
-          <Section className="mt-16">
-            <Section.Header>
-              <h5 className="text-header5 ">Related posts</h5>
-            </Section.Header>
-            <Section.Content>
-              <RelatedPosts
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-subgrid grid-rows-[2fr] col-span-3 col-start-1 mt-12"
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-              />
-            </Section.Content>
-          </Section>
+          <div className="mt-16">
+            <h5 className="text-header5">Related posts</h5>
+            <RelatedPosts
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-subgrid grid-rows-[2fr] col-span-3 col-start-1 mt-12"
+              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+            />
+          </div>
         )}
       </div>
     </article>

@@ -1,9 +1,8 @@
 'use client'
 
+import { useEffect,  useMemo,  useState } from 'react'
 import { User } from '@/payload-types'
-import { Button } from '@/payload/blocks/Form/_ui/button'
 import { useAuth } from '@/providers/Auth'
-import { useEffect, useMemo, useState } from 'react'
 import { InpostGeowidget } from './InPostGeoWidget'
 
 const formatAddress = (addressDetails): string => {
@@ -42,21 +41,21 @@ export const ShipmentSection = () => {
 
   return (
     <section className="p-4 border border-gray-300 rounded-lg">
-      <h4 className="text-lg font-semibold mb-4">Dostawa</h4>
+      <h4 className="mb-4 font-semibold text-lg">Dostawa</h4>
 
       <div className="flex gap-4 mb-4">
-        <Button
-          variant={shipmentType === 'address' ? 'default' : 'secondary'}
+        <button
+          className={shipmentType === 'address' ? 'default' : 'secondary'}
           onClick={() => setShipmentType('address')}
         >
           Na adres
-        </Button>
-        <Button
-          variant={shipmentType === 'inpost' ? 'default' : 'secondary'}
+        </button>
+        <button
+          className={shipmentType === 'inpost' ? 'default' : 'secondary'}
           onClick={() => setShipmentType('inpost')}
         >
           Na paczkomat
-        </Button>
+        </button>
       </div>
 
       {shipmentType === 'address' && (
@@ -65,7 +64,7 @@ export const ShipmentSection = () => {
             <>
               <label className="block font-medium text-gray-700">Wybierz adres:</label>
               <select
-                className="border rounded p-2"
+                className="p-2 border rounded"
                 value={selectedAddressIndex}
                 onChange={(e) => setSelectedAddressIndex(Number(e.target.value))}
               >
@@ -75,7 +74,7 @@ export const ShipmentSection = () => {
                   </option>
                 ))}
               </select>
-              <div className="text-gray-600 mt-2">
+              <div className="mt-2 text-gray-600">
                 <p>
                   <strong>Miasto:</strong> {addresses[selectedAddressIndex]?.city}
                 </p>
@@ -110,20 +109,19 @@ export const ShipmentSection = () => {
             </div>
           ) : (
             <>
-              <h4 className="text-lg font-semibold mb-2">Wybrany paczkomat</h4>
+              <h4 className="mb-2 font-semibold text-lg">Wybrany paczkomat</h4>
               <div className="bg-green-100 p-2 rounded text-green-800 whitespace-pre-wrap">
                 <div dangerouslySetInnerHTML={{ __html: selectedInpost || '' }} />
               </div>
-              <Button
+              <button
                 className="mt-4"
-                variant="default"
                 onClick={() => {
                   setShowInpostWidget(true)
                   setSelectedInpost(null)
                 }}
               >
                 Zmień paczkomat
-              </Button>
+              </button>
             </>
           )}
         </div>

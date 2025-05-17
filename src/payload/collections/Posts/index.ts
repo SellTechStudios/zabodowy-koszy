@@ -1,35 +1,20 @@
-import {
-  AlignFeature,
-  BlockquoteFeature,
-  BlocksFeature,
-  ChecklistFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  IndentFeature,
-  InlineToolbarFeature,
-  SubscriptFeature,
-  SuperscriptFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
-
-import { Code } from '../../blocks/Code/config'
-import type { CollectionConfig } from 'payload'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { anyone } from '@/payload/access/anyone'
 import { authenticated } from '@/payload/access/authenticated'
-import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
 import { slugField } from '@/payload/fields/slug'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import {
+    MetaDescriptionField,  MetaImageField,  MetaTitleField,  OverviewField,  PreviewField
+} from '@payloadcms/plugin-seo/fields'
+import {
+    AlignFeature,  BlockquoteFeature,  BlocksFeature,  ChecklistFeature,  FixedToolbarFeature,
+    HeadingFeature,  HorizontalRuleFeature,  IndentFeature,  InlineToolbarFeature,  lexicalEditor,
+    SubscriptFeature,  SuperscriptFeature
+} from '@payloadcms/richtext-lexical'
+import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { populateAuthors } from './hooks/populateAuthors'
+import { revalidateDelete,  revalidatePost } from './hooks/revalidatePost'
 
+import type { CollectionConfig } from 'payload'
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
@@ -114,7 +99,7 @@ export const Posts: CollectionConfig<'posts'> = {
                     SuperscriptFeature(),
                     // OrderedListFeature(),    <-- that thing throws error in admin editor
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Code, MediaBlock] }),
+                    BlocksFeature({ blocks: [MediaBlock] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

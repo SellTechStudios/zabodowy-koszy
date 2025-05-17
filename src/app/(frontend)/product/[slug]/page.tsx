@@ -1,16 +1,14 @@
-import { detailsQueries, productQueries } from '@/db'
-
-import { AddToCartButton } from '@/components/Cart/AddToCartButton'
-import { CollectionMeta } from '@/payload/collections/eCom/_interfaces/collection-meta'
-import { Container } from '@/components/Container'
 import { Metadata } from 'next'
-import { Product } from '@/payload-types'
-import { ProductGallery } from './_components/ProductGallery'
-import { ProductQuantitySelector } from '@/components/Product/ProductQuantitySelector'
-import { RemoveFromCartButton } from '@/components/Cart/RemoveFromCartButton'
-import { formatCurrency } from '@/utilities/formatPrice'
-import { generateProductMeta } from '@/payload/utilities/generateProductMeta'
 import { notFound } from 'next/navigation'
+import { AddToCartButton } from '@/components/Cart/AddToCartButton'
+import { RemoveFromCartButton } from '@/components/Cart/RemoveFromCartButton'
+import { Container } from '@/components/Container'
+import { ProductQuantitySelector } from '@/components/Product/ProductQuantitySelector'
+import { detailsQueries,  productQueries } from '@/db'
+import { Product } from '@/payload-types'
+import { CollectionMeta } from '@/payload/collections/eCom/_interfaces/collection-meta'
+import { generateProductMeta } from '@/payload/utilities/generateProductMeta'
+import { formatCurrency } from '@/utilities/formatPrice'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,7 +27,6 @@ export default async function ProductDetailsPage({
   return (
     <Container>
       <section className="md:gap-16 md:grid md:grid-cols-2">
-        <ProductGallery product={product} />
         <div>
           <h1 className="mt-4 md:mt-0 text-3xl">{product.title}</h1>
           <h2 className="my-4 text-red-600 text-2xl">{formatCurrency(product.price ?? 0)}</h2>

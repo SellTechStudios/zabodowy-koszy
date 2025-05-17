@@ -1,10 +1,10 @@
 'use client'
 
-import CartItem from './CartItem'
-import EmptyCart from './CartEmpty'
-import { LoadingShimmer } from '@/components/LoadingShimmer'
 import React from 'react'
+import { LoadingShimmer } from '@/components/LoadingShimmer'
 import { useCart } from '@/providers/Cart'
+import EmptyCart from './CartEmpty'
+import CartItem from './CartItem'
 
 const CartItemsList = () => {
   const { hasInitializedCart, cart, cartIsEmpty, addItemToCart } = useCart()
@@ -24,7 +24,7 @@ const CartItemsList = () => {
   return (
     <div>
       {/* CART LIST HEADER */}
-      <div className="hidden sm:grid sm:grid-cols-[100px_3fr_1fr_1fr_1fr] gap-6 mb-2">
+      <div className="hidden gap-6 sm:grid sm:grid-cols-[100px_3fr_1fr_1fr_1fr] mb-2">
         <p>Produkt</p>
         <p></p>
         <p className="text-center">Ilość</p>
@@ -32,13 +32,13 @@ const CartItemsList = () => {
         <p className="text-center">Usuń</p>
       </div>
       {/* CART ITEM LIST */}
-      <ul className="border-t border-gray-300">
+      <ul className="border-gray-300 border-t">
         {cart?.items?.map((item) => {
           if (item.product && typeof item.product === 'object') {
             const {
               quantity,
               product,
-              product: { id, title, mediaImages },
+              product: { id, title },
             } = item
 
             return (
@@ -46,7 +46,7 @@ const CartItemsList = () => {
                 key={id}
                 product={product}
                 title={title}
-                image={mediaImages?.[0]?.url || ''}
+                image={''}
                 qty={quantity}
                 addItemToCart={addItemToCart}
               />

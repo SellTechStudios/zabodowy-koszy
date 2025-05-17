@@ -1,18 +1,15 @@
 'use client'
 /* eslint-disable @next/next/no-img-element */
 
-import { CircleCheckBig, Heart, ShoppingCart } from 'lucide-react'
-
+import { CircleCheckBig,  Heart,  ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/FormElements/button'
-import { CartItem } from '@/providers/Cart/reducer'
-import { GetMainImageUrl } from '@/payload/utilities/productUtils'
-import { Product } from '@/payload-types'
 import { ProductItem } from '@/db/products/queries.types'
-import ReviewStars from '../ReviewStars/ReviewStars'
+import { Product } from '@/payload-types'
 import { cn } from '@/payload/utilities/cn'
-import { formatCurrency } from '@/utilities/formatPrice'
 import { useAuth } from '@/providers/Auth'
 import { useCart } from '@/providers/Cart'
+import { CartItem } from '@/providers/Cart/reducer'
+import { formatCurrency } from '@/utilities/formatPrice'
 
 type ProductProps = {
   product: ProductItem
@@ -23,7 +20,9 @@ export const ProductCard: React.FC<ProductProps> = ({ product }: ProductProps) =
   const { hasFavoriteProduct, toggleFavoriteProduct } = useAuth()
 
   const isInCart = isProductInCart(product.id)
-  const imageUrl = GetMainImageUrl(product as unknown as Product)
+  const firstImage = product.images?.[0]
+  const imageUrl = typeof firstImage === 'string' ? firstImage : firstImage?.url
+
   const percentageOff =
     product.pricePrevious && product.pricePrevious > product.price
       ? Math.round(((product.pricePrevious - product.price) / product.pricePrevious) * 100)
@@ -42,7 +41,7 @@ export const ProductCard: React.FC<ProductProps> = ({ product }: ProductProps) =
         href={`/product/${product.slug}`}
       >
         <img
-          src={imageUrl}
+          src={imageUrl || ''}
           className="w-full h-60 object-scale-down group-hover:scale-105 transition-transform duration-100 ease-linear"
           alt={product.title}
         />
@@ -56,7 +55,7 @@ export const ProductCard: React.FC<ProductProps> = ({ product }: ProductProps) =
       <div className="mt-8 px-5 pb-5">
         <div
           onClick={onFavoriteClick}
-          className="absolute top-2 right-2 p-2 rounded-full  bg-white cursor-pointer hover:bg-slate-200"
+          className="top-2 right-2 absolute bg-white hover:bg-slate-200 p-2 rounded-full cursor-pointer"
         >
           <Heart
             className={cn(
@@ -78,9 +77,6 @@ export const ProductCard: React.FC<ProductProps> = ({ product }: ProductProps) =
               {formatCurrency(product.pricePrevious)}
             </span>
           </p>
-        </div>
-        <div className="mb-4">
-          <ReviewStars rating={product.rating} />
         </div>
         <Button
           onClick={

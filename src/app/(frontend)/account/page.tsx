@@ -1,9 +1,8 @@
 'use client'
 
-import { Button } from '@/payload/blocks/Form/_ui/button'
-import { useAuth } from '@/providers/Auth'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useAuth } from '@/providers/Auth'
 import AddressesSection from './_components/AddressSection'
 import ChangeNameSection from './_components/ChangeNameSection'
 import ChangePasswordSection from './_components/ChangePasswordSection'
@@ -32,48 +31,48 @@ const AccountPage = () => {
   return (
     <>
       <div className="mb-4">
-        <Button variant="secondary" onClick={handleLogout} disabled={isLoggingOut}>
+        <button className="secondary" onClick={handleLogout} disabled={isLoggingOut}>
           {isLoggingOut ? 'Wylogowywanie...' : 'Logout'}
-        </Button>
+        </button>
       </div>
 
       <div className="hidden md:flex md:flex-wrap gap-4 mb-8">
-        <Button
+        <button
           onClick={() => setActiveTab('profile')}
-          variant={activeTab === 'profile' ? 'default' : 'secondary'}
+          className={activeTab === 'profile' ? 'default' : 'secondary'}
         >
           Profil
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setActiveTab('name')}
-          variant={activeTab === 'name' ? 'default' : 'secondary'}
+          className={activeTab === 'name' ? 'default' : 'secondary'}
         >
           Imię i nazwisko
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setActiveTab('password')}
-          variant={activeTab === 'password' ? 'default' : 'secondary'}
+          className={activeTab === 'password' ? 'default' : 'secondary'}
         >
           Zmień hasło
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setActiveTab('phone')}
-          variant={activeTab === 'phone' ? 'default' : 'secondary'}
+          className={activeTab === 'phone' ? 'default' : 'secondary'}
         >
           Zmień numer telefonu
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setActiveTab('addresses')}
-          variant={activeTab === 'addresses' ? 'default' : 'secondary'}
+          className={activeTab === 'addresses' ? 'default' : 'secondary'}
         >
           Adresy
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={() => setActiveTab('orders')}
-          variant={activeTab === 'orders' ? 'default' : 'secondary'}
+          className={activeTab === 'orders' ? 'default' : 'secondary'}
         >
           Historia zamówień
-        </Button>
+        </button>
       </div>
 
       <div className="md:hidden block mb-4 md:mb-8">

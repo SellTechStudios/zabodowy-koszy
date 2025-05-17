@@ -1,9 +1,9 @@
-import { Button } from '@/payload/blocks/Form/_ui/button'
+import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <div className="container py-28">
-      <div className="prose max-w-none">
+    <div className="py-28 container">
+      <div className="max-w-none prose">
         <h1 style={{ marginBottom: 0 }}>404</h1>
         <h3>Ups! Coś poszło nie tak... 😕</h3>
         <p className="mb-4">
@@ -11,7 +11,7 @@ export default function NotFound() {
           adres był zły. Ale nie martw się, pomożemy Ci wrócić na właściwy tor!
         </p>
       </div>
-      <Button href="/">Wróć na strone główną</Button>
+      <Link href="/">Wróć na strone główną</Link>
     </div>
   )
 }

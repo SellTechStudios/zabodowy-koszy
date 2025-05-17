@@ -1,10 +1,9 @@
 'use client'
 
-import { User } from '@/payload-types'
-import { Button } from '@/payload/blocks/Form/_ui/button'
-import { useAuth } from '@/providers/Auth'
 import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler,  useForm } from 'react-hook-form'
+import { User } from '@/payload-types'
+import { useAuth } from '@/providers/Auth'
 import AddressInput from './AddressInput'
 
 type AddressFormValues = NonNullable<User['addresses']>[number]
@@ -43,7 +42,7 @@ const AddAddressForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-md">
-      <h3 className="text-xl font-semibold">Dodaj adres</h3>
+      <h3 className="font-semibold text-xl">Dodaj adres</h3>
 
       <AddressInput
         label="Kod pocztowy"
@@ -80,10 +79,10 @@ const AddAddressForm: React.FC = () => {
         {...register('apartmentNumber')}
       />
 
-      <Button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Dodaj adres
-      </Button>
-      {message && <p className="mt-2 text-sm font-medium">{message}</p>}
+      </button>
+      {message && <p className="mt-2 font-medium text-sm">{message}</p>}
     </form>
   )
 }

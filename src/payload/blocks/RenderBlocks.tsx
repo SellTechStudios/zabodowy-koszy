@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react'
-
+import React,  { Fragment } from 'react'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
-import type { Page } from '@/payload-types'
 import { ProductsShowcaseBlock } from './ProductsShowcaseBlock/Component.Client'
 import { ProductsSliderBlock } from './ProductsSliderBlock/Component'
 
+import type { Page } from '@/payload-types'
 const blockComponents = {
   content: ContentBlock,
   mediaBlock: MediaBlock,
@@ -32,7 +31,7 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div className={index > 0 ? 'my-12' : ''} key={index}>
-                  <Block {...block} disableInnerContainer />
+                  <Block {...block} />
                 </div>
               )
             }

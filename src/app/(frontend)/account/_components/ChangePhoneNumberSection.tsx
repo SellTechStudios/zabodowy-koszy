@@ -1,9 +1,8 @@
 'use client'
 
-import { Button } from '@/payload/blocks/Form/_ui/button'
+import React,  { useEffect,  useState } from 'react'
+import { SubmitHandler,  useForm } from 'react-hook-form'
 import { useAuth } from '@/providers/Auth'
-import React, { useEffect, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
 
 type PhoneFormValues = {
   phoneNumber: string
@@ -38,18 +37,16 @@ const ChangePhoneNumberSection: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-md">
-      <h3 className="text-xl font-semibold">Zmień numer telefonu</h3>
+      <h3 className="font-semibold text-xl">Zmień numer telefonu</h3>
       <div>
         <label className="block mb-1 font-medium">Numer telefonu</label>
-        <input type="tel" {...register('phoneNumber')} className="border rounded p-2 w-full" />
+        <input type="tel" {...register('phoneNumber')} className="p-2 border rounded w-full" />
         {errors.phoneNumber && (
-          <p className="text-red-500 text-sm mt-1">{errors.phoneNumber.message}</p>
+          <p className="mt-1 text-red-500 text-sm">{errors.phoneNumber.message}</p>
         )}
       </div>
-      <Button type="submit" variant="default">
-        Zapisz numer
-      </Button>
-      {message && <p className="mt-2 text-sm font-medium">{message}</p>}
+      <button type="submit">Zapisz numer</button>
+      {message && <p className="mt-2 font-medium text-sm">{message}</p>}
     </form>
   )
 }

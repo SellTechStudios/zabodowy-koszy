@@ -1,10 +1,8 @@
 'use client'
 
-import CartItemsList from '@/components/Cart/CartItemsList'
-import { Button } from '@/payload/blocks/Form/_ui/button'
-
 import { ShoppingCart } from 'lucide-react'
 import React from 'react'
+import CartItemsList from '@/components/Cart/CartItemsList'
 
 interface CartSummaryProps {
   onPlaceOrderAction: () => void
@@ -12,15 +10,15 @@ interface CartSummaryProps {
 
 export const CartSummary: React.FC<CartSummaryProps> = ({ onPlaceOrderAction }) => {
   return (
-    <aside className="basis-1/4 p-4 bg-gray-200 rounded-tr-lg rounded-bl-lg">
-      <header className="flex flex-row gap-2 items-center mb-4">
+    <aside className="bg-gray-200 p-4 rounded-tr-lg rounded-bl-lg basis-1/4">
+      <header className="flex flex-row items-center gap-2 mb-4">
         <ShoppingCart className="size-6" />
         <h4>Koszyk</h4>
       </header>
       <CartItemsList />
-      <Button onClick={onPlaceOrderAction} className="mt-4 w-full">
+      <button onClick={onPlaceOrderAction} className="mt-4 w-full">
         Złóż zamówienie
-      </Button>
+      </button>
     </aside>
   )
 }

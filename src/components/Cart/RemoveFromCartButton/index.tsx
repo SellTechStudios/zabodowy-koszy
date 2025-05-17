@@ -1,11 +1,10 @@
 'use client'
 
-import { Button } from '@/payload/blocks/Form/_ui/button'
-import { Product } from '@/payload-types'
-import React from 'react'
 import { Trash2 } from 'lucide-react'
-import { cn } from '@/utilities/cn'
+import React from 'react'
+import { Product } from '@/payload-types'
 import { useCart } from '@/providers/Cart'
+import { cn } from '@/utilities/cn'
 
 export const RemoveFromCartButton: React.FC<{
   className?: string
@@ -22,14 +21,13 @@ export const RemoveFromCartButton: React.FC<{
   }
 
   return (
-    <Button
-      variant="clear"
+    <button
       onClick={() => {
         deleteItemFromCart(product.id)
       }}
-      className={cn(className, 'text-red-500')}
+      className={cn(className, 'clear text-red-500')}
     >
       <Trash2 />
-    </Button>
+    </button>
   )
 }

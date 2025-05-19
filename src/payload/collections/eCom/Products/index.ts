@@ -58,15 +58,66 @@ const Products: CollectionConfig = {
               editor: defaultLexical,
             },
             {
-              name: 'specialOffer',
-              label: 'Special Offer',
-              type: 'checkbox',
-            },
-            {
               name: 'images',
               type: 'upload',
               relationTo: 'media',
               hasMany: true,
+            },
+          ],
+        },
+        {
+          label: 'Variants',
+          fields: [
+            {
+              name: 'variants',
+              type: 'blocks',
+              minRows: 1,
+              blocks: [
+                {
+                  slug: 'variant',
+                  labels: {
+                    singular: 'variant',
+                    plural: 'variants',
+                  },
+                  fields: [
+                    {
+                      name: 'color',
+                      type: 'select',
+                      options: [
+                        {
+                          label: 'Red',
+                          value: '#ff0000',
+                        },
+                        {
+                          label: 'Green',
+                          value: '#00ff00',
+                        },
+                        {
+                          label: 'Blue',
+                          value: '#0000ff',
+                        },
+                      ],
+                    },
+                    {
+                      name: 'variantPrice',
+                      type: 'number',
+                      required: true,
+                    },
+                    {
+                      name: 'variantImages',
+                      type: 'array',
+                      fields: [
+                        {
+                          name: 'image',
+                          type: 'upload',
+                          relationTo: 'media',
+                          required: true,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

@@ -1,3 +1,4 @@
+import { OurFeaturesBlock } from '@/payload/blocks/OurFeatures/config'
 import { ProductsShowcaseBlock } from '@/payload/blocks/ProductsShowcaseBlock/config'
 import { ProductsSliderBlock } from '@/payload/blocks/ProductsSliderBlock/config'
 import { slugField } from '@/payload/fields/slug'
@@ -64,7 +65,13 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Content, MediaBlock, ProductsSliderBlock, ProductsShowcaseBlock],
+              blocks: [
+                Content,
+                MediaBlock,
+                ProductsSliderBlock,
+                ProductsShowcaseBlock,
+                OurFeaturesBlock,
+              ],
               required: true,
               admin: {
                 initCollapsed: false,

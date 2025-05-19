@@ -20,6 +20,8 @@ export default async function ProductDetailsPage({
   const slug = (await params).slug
   const product = await detailsQueries.fetchBySlug(slug)
 
+  console.log(product)
+
   if (!product) {
     notFound()
   }

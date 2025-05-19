@@ -149,7 +149,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (ContentBlock | MediaBlock | ProductsSliderBlock | ProductsShowcaseBlock)[];
+  layout: (ContentBlock | MediaBlock | ProductsSliderBlock | ProductsShowcaseBlock | OurFeaturesBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -324,8 +324,22 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
-  specialOffer?: boolean | null;
   images?: (string | Media)[] | null;
+  variants?:
+    | {
+        color?: ('#ff0000' | '#00ff00' | '#0000ff') | null;
+        variantPrice: number;
+        variantImages?:
+          | {
+              image: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'variant';
+      }[]
+    | null;
   relatedProducts?: (string | Product)[] | null;
   seoTitle?: string | null;
   seoDescription?: string | null;
@@ -345,6 +359,23 @@ export interface ProductCategory {
   name: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OurFeaturesBlock".
+ */
+export interface OurFeaturesBlock {
+  title: string;
+  items?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ourFeatures';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -560,6 +591,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         productsSlider?: T | ProductsSliderBlockSelect<T>;
         productsShowcase?: T | ProductsShowcaseBlockSelect<T>;
+        ourFeatures?: T | OurFeaturesBlockSelect<T>;
       };
   meta?:
     | T
@@ -611,6 +643,22 @@ export interface ProductsSliderBlockSelect<T extends boolean = true> {
 export interface ProductsShowcaseBlockSelect<T extends boolean = true> {
   title?: T;
   products?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OurFeaturesBlock_select".
+ */
+export interface OurFeaturesBlockSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -827,8 +875,25 @@ export interface ProductsSelect<T extends boolean = true> {
   price?: T;
   pricePrevious?: T;
   description?: T;
-  specialOffer?: T;
   images?: T;
+  variants?:
+    | T
+    | {
+        variant?:
+          | T
+          | {
+              color?: T;
+              variantPrice?: T;
+              variantImages?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   relatedProducts?: T;
   seoTitle?: T;
   seoDescription?: T;

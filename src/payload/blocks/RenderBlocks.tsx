@@ -1,11 +1,11 @@
 import React,  { Fragment } from 'react'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
+import { OurFetauresBlock } from './OurFeatures/Component.Client'
 import { ProductsShowcaseBlock } from './ProductsShowcaseBlock/Component.Client'
 import { ProductsSliderBlock } from './ProductsSliderBlock/Component'
 
 import type { Page } from '@/payload-types'
-
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
 }> = (props) => {
@@ -28,6 +28,8 @@ export const RenderBlocks: React.FC<{
               return <ProductsSliderBlock {...block} key={index} />
             case 'productsShowcase':
               return <ProductsShowcaseBlock {...block} key={index} />
+            case 'ourFeatures':
+              return <OurFetauresBlock {...block} key={index} />
           }
 
           return null

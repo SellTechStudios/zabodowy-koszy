@@ -81,29 +81,6 @@ const Products: CollectionConfig = {
                   },
                   fields: [
                     {
-                      name: 'color',
-                      type: 'select',
-                      options: [
-                        {
-                          label: 'Red',
-                          value: '#ff0000',
-                        },
-                        {
-                          label: 'Green',
-                          value: '#00ff00',
-                        },
-                        {
-                          label: 'Blue',
-                          value: '#0000ff',
-                        },
-                      ],
-                    },
-                    {
-                      name: 'variantPrice',
-                      type: 'number',
-                      required: true,
-                    },
-                    {
                       name: 'variantImages',
                       type: 'array',
                       fields: [

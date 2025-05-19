@@ -1,4 +1,4 @@
-import React,  { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
 import { OurFetauresBlock } from './OurFeatures/Component.Client'
@@ -15,7 +15,7 @@ export const RenderBlocks: React.FC<{
 
   if (hasBlocks) {
     return (
-      <Fragment>
+      <div className="flex flex-col gap-16">
         {blocks.map((block, index) => {
           const { blockType } = block
 
@@ -31,10 +31,8 @@ export const RenderBlocks: React.FC<{
             case 'ourFeatures':
               return <OurFetauresBlock {...block} key={index} />
           }
-
-          return null
         })}
-      </Fragment>
+      </div>
     )
   }
 

@@ -12,9 +12,9 @@ export const ProductsShowcaseBlock: React.FC<Props> = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <div className="prose">
-        <h3>{title}</h3>
-      </div>
+      <h3 className="after:block relative after:bg-current after:mx-auto my-8 after:mt-2 after:w-[60px] after:h-0.5 font-thin text-4xl text-center after:content-['']">
+        {title}
+      </h3>
 
       <div className="flex flex-row gap-8">
         {Array.isArray(products) &&

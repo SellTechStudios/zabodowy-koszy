@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@nomic-ai/atlas": "^0.12.0",
     "@hookform/resolvers": "^5.0.1",
+    "@nomic-ai/atlas": "^0.12.0",
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/live-preview-react": "latest",
     "@payloadcms/next": "latest",

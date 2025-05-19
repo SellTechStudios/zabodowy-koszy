@@ -327,8 +327,6 @@ export interface Product {
   images?: (string | Media)[] | null;
   variants?:
     | {
-        color?: ('#ff0000' | '#00ff00' | '#0000ff') | null;
-        variantPrice: number;
         variantImages?:
           | {
               image: string | Media;
@@ -882,8 +880,6 @@ export interface ProductsSelect<T extends boolean = true> {
         variant?:
           | T
           | {
-              color?: T;
-              variantPrice?: T;
               variantImages?:
                 | T
                 | {

@@ -149,7 +149,14 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  layout: (ContentBlock | MediaBlock | ProductsSliderBlock | ProductsShowcaseBlock | OurFeaturesBlock)[];
+  layout: (
+    | ContentBlock
+    | MediaBlock
+    | ProductsSliderBlock
+    | ProductsShowcaseBlock
+    | OurFeaturesBlock
+    | YellowBannerBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -377,6 +384,21 @@ export interface OurFeaturesBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YellowBannerBlock".
+ */
+export interface YellowBannerBlock {
+  items?:
+    | {
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'yellowBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -590,6 +612,7 @@ export interface PagesSelect<T extends boolean = true> {
         productsSlider?: T | ProductsSliderBlockSelect<T>;
         productsShowcase?: T | ProductsShowcaseBlockSelect<T>;
         ourFeatures?: T | OurFeaturesBlockSelect<T>;
+        yellowBanner?: T | YellowBannerBlockSelect<T>;
       };
   meta?:
     | T
@@ -655,6 +678,20 @@ export interface OurFeaturesBlockSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YellowBannerBlock_select".
+ */
+export interface YellowBannerBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        title?: T;
         id?: T;
       };
   id?: T;

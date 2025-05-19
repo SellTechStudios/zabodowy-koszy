@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
 import { OurFetauresBlock } from './OurFeatures/Component.Client'
 import { ProductsShowcaseBlock } from './ProductsShowcaseBlock/Component.Client'
 import { ProductsSliderBlock } from './ProductsSliderBlock/Component'
+import { YellowBannerBlock } from './YellowBannerBlock/Component.Client'
 
 import type { Page } from '@/payload-types'
 export const RenderBlocks: React.FC<{
@@ -30,6 +31,8 @@ export const RenderBlocks: React.FC<{
               return <ProductsShowcaseBlock {...block} key={index} />
             case 'ourFeatures':
               return <OurFetauresBlock {...block} key={index} />
+            case 'yellowBanner':
+              return <YellowBannerBlock {...block} key={index} />
           }
         })}
       </div>

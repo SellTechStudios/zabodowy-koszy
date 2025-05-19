@@ -1,7 +1,7 @@
 import './globals.css'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
-import { Archivo,  Work_Sans } from 'next/font/google'
+import { Archivo, Work_Sans } from 'next/font/google'
 import { draftMode } from 'next/headers'
 import React from 'react'
 import { AdminBar } from '@/components/AdminBar'
@@ -44,7 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
 
           <Header />
-          <main className="py-4 main">
+          <main className="main">
             <Container>{children}</Container>
           </main>
           <Footer />

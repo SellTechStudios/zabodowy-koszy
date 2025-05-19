@@ -1,5 +1,3 @@
-import Fa6IconSelector from '@/payload/fields/iconSelect/Fa6IconSelectorComponent'
-
 import type { Block } from 'payload'
 
 export const OurFeaturesBlock: Block = {
@@ -33,15 +31,6 @@ export const OurFeaturesBlock: Block = {
           type: 'textarea',
           required: true,
         },
-        // {
-        //   name: 'icon',
-        //   type: 'text',
-        //   admin: {
-        //     components: {
-        //       Field: '/payload/fields/iconSelect/Fa6IconSelectorComponent',
-        //     },
-        //   },
-        // },
       ],
     },
   ],

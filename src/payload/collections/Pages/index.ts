@@ -1,9 +1,14 @@
 import { OurFeaturesBlock } from '@/payload/blocks/OurFeatures/config'
 import { ProductsShowcaseBlock } from '@/payload/blocks/ProductsShowcaseBlock/config'
 import { ProductsSliderBlock } from '@/payload/blocks/ProductsSliderBlock/config'
+import { YellowBannerBlock } from '@/payload/blocks/YellowBannerBlock/config'
 import { slugField } from '@/payload/fields/slug'
 import {
-    MetaDescriptionField,  MetaImageField,  MetaTitleField,  OverviewField,  PreviewField
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
@@ -11,7 +16,7 @@ import { Content } from '../../blocks/Content/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { revalidateDelete,  revalidatePage } from './hooks/revalidatePage'
+import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
 import type { CollectionConfig } from 'payload'
 export const Pages: CollectionConfig<'pages'> = {
@@ -71,6 +76,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ProductsSliderBlock,
                 ProductsShowcaseBlock,
                 OurFeaturesBlock,
+                YellowBannerBlock,
               ],
               required: true,
               admin: {

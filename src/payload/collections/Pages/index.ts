@@ -1,4 +1,5 @@
 import { OurFeaturesBlock } from '@/payload/blocks/OurFeatures/config'
+import { ProductCategoriesBlock } from '@/payload/blocks/ProductCategoriesBlock/config'
 import { ProductsShowcaseBlock } from '@/payload/blocks/ProductsShowcaseBlock/config'
 import { ProductsSliderBlock } from '@/payload/blocks/ProductsSliderBlock/config'
 import { YellowBannerBlock } from '@/payload/blocks/YellowBannerBlock/config'
@@ -73,9 +74,10 @@ export const Pages: CollectionConfig<'pages'> = {
               blocks: [
                 Content,
                 MediaBlock,
+                OurFeaturesBlock,
+                ProductCategoriesBlock,
                 ProductsSliderBlock,
                 ProductsShowcaseBlock,
-                OurFeaturesBlock,
                 YellowBannerBlock,
               ],
               required: true,

@@ -2,6 +2,7 @@ import React from 'react'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
 import { OurFetauresBlock } from './OurFeatures/Component.Client'
+import { ProductCategoriesBlock } from './ProductCategoriesBlock/Component.Client'
 import { ProductsShowcaseBlock } from './ProductsShowcaseBlock/Component.Client'
 import { ProductsSliderBlock } from './ProductsSliderBlock/Component'
 import { YellowBannerBlock } from './YellowBannerBlock/Component.Client'
@@ -33,6 +34,8 @@ export const RenderBlocks: React.FC<{
               return <OurFetauresBlock {...block} key={index} />
             case 'yellowBanner':
               return <YellowBannerBlock {...block} key={index} />
+            case 'productCategories':
+              return <ProductCategoriesBlock {...block} key={index} />
           }
         })}
       </div>

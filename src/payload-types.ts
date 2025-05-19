@@ -152,9 +152,10 @@ export interface Page {
   layout: (
     | ContentBlock
     | MediaBlock
+    | OurFeaturesBlock
+    | ProductCategoriesBlock
     | ProductsSliderBlock
     | ProductsShowcaseBlock
-    | OurFeaturesBlock
     | YellowBannerBlock
   )[];
   meta?: {
@@ -285,6 +286,32 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OurFeaturesBlock".
+ */
+export interface OurFeaturesBlock {
+  title: string;
+  items?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ourFeatures';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductCategoriesBlock".
+ */
+export interface ProductCategoriesBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'productCategories';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ProductsSliderBlock".
  */
 export interface ProductsSliderBlock {
@@ -364,23 +391,6 @@ export interface ProductCategory {
   name: string;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "OurFeaturesBlock".
- */
-export interface OurFeaturesBlock {
-  title: string;
-  items?:
-    | {
-        title: string;
-        description: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'ourFeatures';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -609,9 +619,10 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
+        ourFeatures?: T | OurFeaturesBlockSelect<T>;
+        productCategories?: T | ProductCategoriesBlockSelect<T>;
         productsSlider?: T | ProductsSliderBlockSelect<T>;
         productsShowcase?: T | ProductsShowcaseBlockSelect<T>;
-        ourFeatures?: T | OurFeaturesBlockSelect<T>;
         yellowBanner?: T | YellowBannerBlockSelect<T>;
       };
   meta?:
@@ -648,6 +659,30 @@ export interface MediaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OurFeaturesBlock_select".
+ */
+export interface OurFeaturesBlockSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductCategoriesBlock_select".
+ */
+export interface ProductCategoriesBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ProductsSliderBlock_select".
  */
 export interface ProductsSliderBlockSelect<T extends boolean = true> {
@@ -664,22 +699,6 @@ export interface ProductsSliderBlockSelect<T extends boolean = true> {
 export interface ProductsShowcaseBlockSelect<T extends boolean = true> {
   title?: T;
   products?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "OurFeaturesBlock_select".
- */
-export interface OurFeaturesBlockSelect<T extends boolean = true> {
-  title?: T;
-  items?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        id?: T;
-      };
   id?: T;
   blockName?: T;
 }

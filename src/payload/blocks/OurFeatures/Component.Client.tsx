@@ -1,12 +1,7 @@
+'use client'
 import type { OurFeaturesBlock as OurFeaturesProps } from '@/payload-types'
-
 import React from 'react'
-import {
-  PiHouseLineThin,
-  PiPaintBrushBroadThin,
-  PiPencilRulerThin,
-  PiSlidersThin,
-} from 'react-icons/pi'
+import { GetIconComponent } from '@/payload/fields/iconPicker/IconPickerComponent'
 
 export const OurFetauresBlock: React.FC<OurFeaturesProps> = (props: OurFeaturesProps) => {
   const { title, items } = props
@@ -21,6 +16,7 @@ export const OurFetauresBlock: React.FC<OurFeaturesProps> = (props: OurFeaturesP
         {items?.map((item, index) => {
           const randomOffsetX: number = Math.random() * -40 - 30
           const randomOffsetY: number = Math.random() * -40 - 30
+          const IconComponent = GetIconComponent(item.iconPicker as string)
 
           return (
             <React.Fragment key={index}>
@@ -36,12 +32,7 @@ export const OurFetauresBlock: React.FC<OurFeaturesProps> = (props: OurFeaturesP
                     aria-hidden="true"
                   />
 
-                  {index === 0 && (
-                    <PiPaintBrushBroadThin size={80} className="z-10 text-[#74832a]" />
-                  )}
-                  {index === 1 && <PiPencilRulerThin size={80} className="z-10 text-[#74832a]" />}
-                  {index === 2 && <PiHouseLineThin size={80} className="z-10 text-[#74832a]" />}
-                  {index === 3 && <PiSlidersThin size={80} className="z-10 text-[#74832a]" />}
+                  <IconComponent size={80} className="z-10 text-[#74832a]" />
                 </div>
 
                 <h4 className="font-extrabold">{item.title}</h4>

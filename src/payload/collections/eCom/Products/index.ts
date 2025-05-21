@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { colorPickerField } from '@/payload/fields/colorPicker'
 import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { admins } from '../../../access/admins'
 import { slugField } from '../../../fields/slug'
@@ -80,6 +81,7 @@ const Products: CollectionConfig = {
                     plural: 'variants',
                   },
                   fields: [
+                    colorPickerField,
                     {
                       name: 'variantImages',
                       type: 'array',

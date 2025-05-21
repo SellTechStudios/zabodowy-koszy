@@ -294,6 +294,7 @@ export interface OurFeaturesBlock {
     | {
         title: string;
         description: string;
+        iconPicker?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -361,6 +362,7 @@ export interface Product {
   images?: (string | Media)[] | null;
   variants?:
     | {
+        colorPicker?: string | null;
         variantImages?:
           | {
               image: string | Media;
@@ -668,6 +670,7 @@ export interface OurFeaturesBlockSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        iconPicker?: T;
         id?: T;
       };
   id?: T;
@@ -936,6 +939,7 @@ export interface ProductsSelect<T extends boolean = true> {
         variant?:
           | T
           | {
+              colorPicker?: T;
               variantImages?:
                 | T
                 | {

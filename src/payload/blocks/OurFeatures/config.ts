@@ -1,3 +1,5 @@
+import { iconPickerField } from '@/payload/fields/iconPicker'
+
 import type { Block } from 'payload'
 
 export const OurFeaturesBlock: Block = {
@@ -31,6 +33,7 @@ export const OurFeaturesBlock: Block = {
           type: 'textarea',
           required: true,
         },
+        iconPickerField,
       ],
     },
   ],

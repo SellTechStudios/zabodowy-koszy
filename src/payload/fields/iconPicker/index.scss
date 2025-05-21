@@ -1,0 +1,19 @@
+.icon-picker-component {
+
+
+  .icon-selection-wrapper {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+
+    .icon-swatch {
+      outline: 2px transparent;
+      outline-offset: 4px;
+
+      &.selected {
+        outline: 2px solid white;
+      }
+    }
+  }
+}

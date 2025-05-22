@@ -38,6 +38,16 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      title: 'Admin',
+      titleSuffix: '- Zabudowy Koszy',
+    },
+    components: {
+      graphics: {
+        Icon: '/componentsAdmin/Icon/index.tsx#Icon',
+        Logo: '/componentsAdmin/Logo/index.tsx#Logo',
+      },
+    },
     user: Users.slug,
     livePreview: {
       breakpoints: [

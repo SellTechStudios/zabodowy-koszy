@@ -28,6 +28,8 @@ import { default as default_275aebf32bc29ec1eca2156482203bb0 } from '../../../pa
 import { ColorPickerCell as ColorPickerCell_22454bf1bd1ab2fbff58903c21c2197e } from '@/fields/colorPicker/ColorPickerCell'
 import { ColorPickerComponent as ColorPickerComponent_825329501481bc0e04bb53c75811d326 } from '@/fields/colorPicker/ColorPickerComponent'
 import { RowLabel as RowLabel_ec255a65fa6fa8d1faeb09cf35284224 } from '@/Header/RowLabel'
+import { Icon as Icon_abc7e3248f7c152f47e1a4261b2184da } from '../../../componentsAdmin/Icon/index.tsx'
+import { Logo as Logo_cbcabe6e55992fd1c38b22db721c5d3c } from '../../../componentsAdmin/Logo/index.tsx'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -59,5 +61,7 @@ export const importMap = {
   "/payload/fields/tagsArray/tagsArrayComponent#default": default_275aebf32bc29ec1eca2156482203bb0,
   "@/fields/colorPicker/ColorPickerCell#ColorPickerCell": ColorPickerCell_22454bf1bd1ab2fbff58903c21c2197e,
   "@/fields/colorPicker/ColorPickerComponent#ColorPickerComponent": ColorPickerComponent_825329501481bc0e04bb53c75811d326,
-  "@/Header/RowLabel#RowLabel": RowLabel_ec255a65fa6fa8d1faeb09cf35284224
+  "@/Header/RowLabel#RowLabel": RowLabel_ec255a65fa6fa8d1faeb09cf35284224,
+  "/componentsAdmin/Icon/index.tsx#Icon": Icon_abc7e3248f7c152f47e1a4261b2184da,
+  "/componentsAdmin/Logo/index.tsx#Logo": Logo_cbcabe6e55992fd1c38b22db721c5d3c
 }

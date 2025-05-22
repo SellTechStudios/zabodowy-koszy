@@ -1,0 +1,31 @@
+.nav-group__label {
+    font-size: 18px;
+}
+
+.step-nav__home {
+    width: auto;
+    height: auto;
+}
+
+.app-header {
+    margin-bottom: 20px;
+}
+
+.nav-group {
+    margin-top: 20px;
+}
+
+.nav-group__content {
+
+    padding-left: 14px;
+
+    .nav__link {
+        transition: padding 0.1s linear;
+    }
+
+    .nav__link:hover {
+        padding-left: 6px;
+        background-color: var(--theme-elevation-50);
+        text-decoration: none;
+    }
+}
